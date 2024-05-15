@@ -34,8 +34,8 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100vw",
 		height: "100vh",
-		//background: "linear-gradient(to right, #76EE00 , #76EE00 , #458B00)",
-		backgroundImage: "url(https://i.imgur.com/CGby9tN.png)",
+		background: "linear-gradient(to right, #682EE3 , #682EE3 , #682EE3)",
+		//backgroundImage: "url(https://i.imgur.com/CGby9tN.png)",
 		backgroundRepeat: "no-repeat",
 		backgroundSize: "100% 100%",
 		backgroundPosition: "center",
@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 		textAlign: "center",
 	},
 	paper: {
-		backgroundColor: theme.palette.login, //DARK MODE PLW DESIGN//
+		backgroundColor: theme.palette.login,
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
@@ -91,7 +91,7 @@ const Login = () => {
 			<CssBaseline/>
 			<div className={classes.paper}>
 				<div>
-					<img style={{ margin: "0 auto", width: "100%" }} src={logo} alt="Whats" />
+					<img style={{ margin: "0 auto", width: "70%" }} src={logo} alt="Whats" />
 				</div>
 				{/*<Typography component="h1" variant="h5">
 					{i18n.t("login.title")}
