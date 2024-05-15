@@ -131,7 +131,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     height: "100%",
     //backgroundColor: "palette",
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card2: {
