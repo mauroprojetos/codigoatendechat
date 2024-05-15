@@ -130,7 +130,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "palette",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main
     color: "#eee",
   },
   card2: {
@@ -139,7 +140,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card3: {
@@ -148,7 +150,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+  //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card4: {
@@ -157,7 +160,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card5: {
@@ -166,7 +170,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card6: {
@@ -175,7 +180,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card7: {
@@ -184,7 +190,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card8: {
@@ -193,7 +200,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   card9: {
@@ -202,7 +210,8 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "primary",
+    //backgroundColor: "palette",
+    backgroundColor: theme.palette.primary.main,
     color: "#eee",
   },
   fixedHeightPaper2: {
