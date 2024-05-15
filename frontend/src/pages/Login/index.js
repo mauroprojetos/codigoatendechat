@@ -10,14 +10,11 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import {InputAdornment,	IconButton} from '@material-ui/core';
-import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-
+import { versionSystem } from "../../../package.json";
 import { i18n } from "../../translate/i18n";
-
+import { nomeEmpresa } from "../../../package.json";
 import { AuthContext } from "../../context/Auth/AuthContext";
 import logo from "../../assets/logo.png";
-
 
 
 const Copyright = () => {
@@ -25,7 +22,7 @@ const Copyright = () => {
 		<Typography variant="body2" color="primary" align="center">
 			{"Copyright "}
  			<Link color="primary" href="#">
- 				PLW
+ 				{ nomeEmpresa } - v { versionSystem }
  			</Link>{" "}
  			{new Date().getFullYear()}
  			{"."}
@@ -37,9 +34,8 @@ const useStyles = makeStyles(theme => ({
 	root: {
 		width: "100vw",
 		height: "100vh",
-		//background: "linear-gradient(to right, #586CFA , #586CFA , #4C21A7)", //cor de fundo 
-		//backgroundImage: `url(${fundofoto})`, // Substituir o background no assets
-		backgroundColor: theme.palette.primary.main,
+		//background: "linear-gradient(to right, #76EE00 , #76EE00 , #458B00)",
+		backgroundImage: "url(https://i.imgur.com/CGby9tN.png)",
 		backgroundRepeat: "no-repeat",
 		backgroundSize: "100% 100%",
 		backgroundPosition: "center",
@@ -89,17 +85,13 @@ const Login = () => {
 		handleLogin(user);
 	};
 
-	const openInNewTab = url => {
-		window.open(url, '_blank', 'noopener,noreferrer');
-	};
-
 	return (
 		<div className={classes.root}>
 		<Container component="main" maxWidth="xs">
 			<CssBaseline/>
 			<div className={classes.paper}>
 				<div>
-					<center><img style={{ margin: "0 auto", width: "70%" }} src={logo} alt="Logologin" /></center>
+					<img style={{ margin: "0 auto", width: "100%" }} src={logo} alt="Whats" />
 				</div>
 				{/*<Typography component="h1" variant="h5">
 					{i18n.t("login.title")}
@@ -131,7 +123,16 @@ const Login = () => {
 						onChange={handleChangeInput}
 						autoComplete="current-password"
 					/>
-						<Button
+					
+					<Grid container justify="flex-end">
+					  <Grid item xs={6} style={{ textAlign: "right" }}>
+						<Link component={RouterLink} to="/forgetpsw" variant="body2">
+						  Esqueceu sua senha?
+						</Link>
+					  </Grid>
+					</Grid>
+					
+					<Button
 						type="submit"
 						fullWidth
 						variant="contained"
@@ -140,36 +141,22 @@ const Login = () => {
 					>
 						{i18n.t("login.buttons.submit")}
 					</Button>
-					<Grid container spacing={2}>
-				{/*	<Grid item xs={12}>
-						<Link
-						href="#"
-						variant="body2"
-						component={RouterLink}
-						to="/forgetpsw"
-						>
-						{i18n.t("Esqueci minha senha")}
-						</Link>
-					</Grid>*/}
-					<Grid item xs={12}>
-						<Link
-						href="#"
-						variant="body2"
-						component={RouterLink}
-						to="/signup"
-						>
-						{i18n.t("login.buttons.register")}
-						</Link>
-					</Grid>
-					</Grid>
-
+					{ <Grid container>
+						<Grid item>
+							<Link
+								href="#"
+								variant="body2"
+								component={RouterLink}
+								to="/signup"
+							>
+								{i18n.t("login.buttons.register")}
+							</Link>
+						</Grid>
+					</Grid> }
 				</form>
-			{/*	<IconButton color="primary"
-						onClick={() => openInNewTab(`https://wa.me/${process.env.REACT_APP_NUMBER_SUPPORT}`)}>
-						 <WhatsAppIcon style={{ color: "#25D366" }} />
-					</IconButton>
-			<Typography variant="caption" className={classes.supportText}><b>Fale com suporte</b></Typography>*/}
+			
 			</div>
+			<Box mt={8}><Copyright /></Box>
 		</Container>
 		</div>
 	);
