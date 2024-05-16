@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useReducer, useContext } from "react";
-
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { Tooltip } from "@material-ui/core";
@@ -16,7 +15,6 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
-
 import IconButton from "@material-ui/core/IconButton";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import EditIcon from "@material-ui/icons/Edit";
@@ -24,7 +22,6 @@ import api from "../../services/api";
 import TableRowSkeleton from "../../components/TableRowSkeleton";
 import ContactModal from "../../components/ContactModal";
 import ConfirmationModal from "../../components/ConfirmationModal/";
-
 import { i18n } from "../../translate/i18n";
 import MainHeader from "../../components/MainHeader";
 import Title from "../../components/Title";
@@ -35,8 +32,9 @@ import { AuthContext } from "../../context/Auth/AuthContext";
 import { Can } from "../../components/Can";
 import NewTicketModal from "../../components/NewTicketModal";
 import { SocketContext } from "../../context/Socket/SocketContext";
-
-import {CSVLink} from "react-csv";
+import { CSVLink } from "react-csv";
+import { useDropzone } from 'react-dropzone';
+import Papa from 'papaparse';
 
 const reducer = (state, action) => {
   if (action.type === "LOAD_CONTACTS") {
@@ -94,9 +92,7 @@ const useStyles = makeStyles((theme) => ({
 const Contacts = () => {
   const classes = useStyles();
   const history = useHistory();
-
   const { user } = useContext(AuthContext);
-
   const [loading, setLoading] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
   const [searchParam, setSearchParam] = useState("");
@@ -108,8 +104,30 @@ const Contacts = () => {
   const [deletingContact, setDeletingContact] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [hasMore, setHasMore] = useState(false);
-
   const socketManager = useContext(SocketContext);
+
+  const onDrop = (acceptedFiles) => {
+    const file = acceptedFiles[0];
+    Papa.parse(file, {
+      header: true,
+      complete: async (results) => {
+        try {
+          const contacts = results.data.map(contact => ({
+            name: contact.name,
+            number: contact.number,
+            email: contact.email,
+          }));
+          await api.post("/contacts/import", contacts);
+          toast.success(i18n.t("contacts.toasts.imported"));
+          history.go(0);
+        } catch (err) {
+          toastError(err);
+        }
+      }
+    });
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: '.csv' });
 
   useEffect(() => {
     dispatch({ type: "RESET" });
@@ -168,22 +186,6 @@ const Contacts = () => {
     setSelectedContactId(null);
     setContactModalOpen(false);
   };
-
-  // const handleSaveTicket = async contactId => {
-  // 	if (!contactId) return;
-  // 	setLoading(true);
-  // 	try {
-  // 		const { data: ticket } = await api.post("/tickets", {
-  // 			contactId: contactId,
-  // 			userId: user?.id,
-  // 			status: "open",
-  // 		});
-  // 		history.push(`/tickets/${ticket.id}`);
-  // 	} catch (err) {
-  // 		toastError(err);
-  // 	}
-  // 	setLoading(false);
-  // };
 
   const handleCloseOrOpenTicket = (ticket) => {
     setNewTicketModalOpen(false);
@@ -295,13 +297,26 @@ const Contacts = () => {
           >
             {i18n.t("contacts.buttons.add")}
           </Button>
-
-         <CSVLink style={{ textDecoration:'none'}} separator=";" filename={'contatos.csv'} data={contacts.map((contact) => ({ name: contact.name, number: contact.number, email: contact.email }))}>
-          <Button	variant="contained" color="primary"> 
-          EXPORTAR CONTATOS 
-          </Button>
-          </CSVLink>		  
-
+          <CSVLink
+            style={{ textDecoration: 'none' }}
+            separator=";"
+            filename={'contatos.csv'}
+            data={contacts.map((contact) => ({
+              name: contact.name,
+              number: contact.number,
+              email: contact.email,
+            }))}
+          >
+            <Button variant="contained" color="primary">
+              EXPORTAR CONTATOS
+            </Button>
+          </CSVLink>
+          <div {...getRootProps()} style={{ display: 'inline-block' }}>
+            <input {...getInputProps()} />
+            <Button variant="contained" color="primary">
+              IMPORTAR CONTATOS
+            </Button>
+          </div>
         </MainHeaderButtonsWrapper>
       </MainHeader>
       <Paper
