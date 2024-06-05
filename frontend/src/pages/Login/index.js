@@ -86,9 +86,7 @@ const Login = () => {
 		handleLogin(user);
 	};
 
-	const openInNewTab = url => {
-		window.open(url, '_blank', 'noopener,noreferrer');
-	};
+	
 	return (
 		<div className={classes.root}>
 		<Container component="main" maxWidth="xs">
