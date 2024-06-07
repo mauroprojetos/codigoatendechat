@@ -1,1 +1,1 @@
-Todos os direitos reservados atendechat
+Todos os direitos reservados a https://atendechat.com
