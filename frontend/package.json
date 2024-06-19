@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
-  "versionSystem": "5.2.2",
+  "versionSystem": "6.0.0",
   "nomeEmpresa": "Atendechat",
   "private": true,
   "dependencies": {
